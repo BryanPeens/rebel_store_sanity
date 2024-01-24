@@ -31,6 +31,7 @@
   "devDependencies": {
     "@babel/preset-react": "^7.23.3",
     "autoprefixer": "^10.4.12",
+    "caniuse-lite": "^1.0.30001579",
     "eslint": "8.25.0",
     "eslint-config-next": "12.3.1",
     "postcss": "^8.4.18",
