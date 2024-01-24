@@ -18,7 +18,7 @@
     "@sanity/vision": "^2.29.5",
     "@stripe/stripe-js": "^2.4.0",
     "canvas-confetti": "^1.9.2",
-    "eslint": "^8.6.0",
+    "eslint": "^8.56.0",
     "next": "12.3.1",
     "prop-types": "^15.7",
     "react": "^17.0",
@@ -30,6 +30,8 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.23.3",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
     "autoprefixer": "^10.4.12",
     "caniuse-lite": "^1.0.30001579",
     "eslint": "8.25.0",
