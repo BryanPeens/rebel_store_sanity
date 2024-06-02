@@ -36,9 +36,9 @@ const Cart = () => {
     <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
         <button
-        type="button"
-        className="cart-heading"
-        onClick={() => setShowCart(false)}>
+          type="button"
+          className="cart-heading"
+          onClick={() => setShowCart(false)}>
           <AiOutlineLeft />
           <span className="heading">Your Cart</span>
           <span className="cart-num-items">({totalQuantities} items)</span>
@@ -71,15 +71,15 @@ const Cart = () => {
                 </div>
                 <div className="flex bottom">
                   <div>
-
-                  <p className="quantity-desc inline-flex text-center">
-                    <span className="minus" onClick={() => toggleCartItemQuanitity(item._id, 'dec') }>
-                    <AiOutlineMinus />
-                    </span>
-                    <span className="num" onClick="">{item.quantity}</span>
-                    <span className="plus" onClick={() => toggleCartItemQuanitity(item._id, 'inc') }><AiOutlinePlus /></span>
-                  </p>
-
+                    <p className="quantity-desc inline-flex text-center">
+                      <span className="minus" onClick={() => toggleCartItemQuanitity(item._id, 'dec') }>
+                        <AiOutlineMinus />
+                      </span>
+                      <span className="num">{item.quantity}</span>
+                      <span className="plus" onClick={() => toggleCartItemQuanitity(item._id, 'inc') }>
+                        <AiOutlinePlus />
+                      </span>
+                    </p>
                   </div>
                   <button
                     type="button"
