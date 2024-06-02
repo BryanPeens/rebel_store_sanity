@@ -10,7 +10,7 @@ import getStripe from '../lib/getStripe';
 
 const Cart = () => {
   const cartRef = useRef();
-  const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuanitity, onRemove } = useStateContext();
+  const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity, onRemove } = useStateContext();
 
   const handleCheckout = async () => {
     const stripe = await getStripe();
@@ -23,7 +23,7 @@ const Cart = () => {
       body: JSON.stringify(cartItems),
     });
 
-    if(response.statusCode === 500) return;
+    if (response.statusCode === 500) return;
     
     const data = await response.json();
 
@@ -33,74 +33,73 @@ const Cart = () => {
   }
 
   return (
-    <div className="cart-wrapper" ref={cartRef}>
-      <div className="cart-container">
+    <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
+      <div className="bg-white w-full max-w-md rounded-lg p-6 relative" ref={cartRef}>
         <button
           type="button"
-          className="cart-heading"
-          onClick={() => setShowCart(false)}>
+          className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+          onClick={() => setShowCart(false)}
+        >
           <AiOutlineLeft />
-          <span className="heading">Your Cart</span>
-          <span className="cart-num-items">({totalQuantities} items)</span>
         </button>
-
-        {cartItems.length < 1 && (
-          <div className="empty-cart">
-            <AiOutlineShopping className='center' size={150} />
-            <h3>Your shopping bag is empty</h3>
+        <h2 className="text-xl font-semibold mb-4">Your Cart</h2>
+        {cartItems.length < 1 ? (
+          <div className="text-center">
+            <AiOutlineShopping className="mx-auto text-6xl text-gray-400 mb-4" />
+            <p className="mb-4">Your shopping bag is empty</p>
             <Link href="/">
-              <button
-                type="button"
-                onClick={() => setShowCart(false)}
-                className="btn"
-              >
-                Continue Shopping
-              </button>
+              <a className="text-blue-500 hover:underline">Continue Shopping</a>
             </Link>
           </div>
-        )}
-
-        <div className="product-container">
-          {cartItems.length >= 1 && cartItems.map((item) => (
-            <div className="product" key={item._id}>
-              <img src={urlFor(item?.image[0])} className="cart-product-image" />
-              <div className="item-desc">
-                <div className="flex top">
-                  <h5>{item.name}</h5>
-                  <h4>${item.price}</h4>
-                </div>
-                <div className="flex bottom">
-                  <div>
-                    <p className="quantity-desc inline-flex text-center">
-                      <span className="minus" onClick={() => toggleCartItemQuanitity(item._id, 'dec') }>
-                        <AiOutlineMinus />
-                      </span>
-                      <span className="num">{item.quantity}</span>
-                      <span className="plus" onClick={() => toggleCartItemQuanitity(item._id, 'inc') }>
-                        <AiOutlinePlus />
-                      </span>
-                    </p>
+        ) : (
+          <div>
+            <div className="space-y-4">
+              {cartItems.map((item) => (
+                <div className="flex items-center justify-between" key={item._id}>
+                  <div className="flex items-center space-x-4">
+                    <img src={urlFor(item?.image[0])} alt={item.name} className="w-16 h-16 object-cover" />
+                    <div>
+                      <p className="text-gray-800 font-semibold">{item.name}</p>
+                      <p className="text-gray-600">${item.price}</p>
+                    </div>
                   </div>
-                  <button
-                    type="button"
-                    className="remove-item"
-                    onClick={() => onRemove(item)}
-                  >
-                    <TiDeleteOutline />
-                  </button>
+                  <div className="flex items-center space-x-4">
+                    <button
+                      type="button"
+                      className="text-gray-400 hover:text-gray-600"
+                      onClick={() => toggleCartItemQuantity(item._id, 'dec')}
+                    >
+                      <AiOutlineMinus />
+                    </button>
+                    <span className="text-gray-600">{item.quantity}</span>
+                    <button
+                      type="button"
+                      className="text-gray-400 hover:text-gray-600"
+                      onClick={() => toggleCartItemQuantity(item._id, 'inc')}
+                    >
+                      <AiOutlinePlus />
+                    </button>
+                    <button
+                      type="button"
+                      className="text-red-400 hover:text-red-600"
+                      onClick={() => onRemove(item)}
+                    >
+                      <TiDeleteOutline />
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
-        {cartItems.length >= 1 && (
-          <div className="cart-bottom">
-            <div className="total">
-              <h3>Subtotal:</h3>
-              <h3>${totalPrice}</h3>
+            <div className="mt-6 flex items-center justify-between">
+              <p className="text-gray-800 font-semibold">Subtotal:</p>
+              <p className="text-gray-800 font-semibold">${totalPrice}</p>
             </div>
-            <div className="btn-container">
-              <button type="button" className="btn" onClick={handleCheckout}>
+            <div className="mt-6">
+              <button
+                type="button"
+                className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
+                onClick={handleCheckout}
+              >
                 Pay with Stripe
               </button>
             </div>
@@ -108,7 +107,7 @@ const Cart = () => {
         )}
       </div>
     </div>
-  )
+  );
 }
 
 export default Cart;

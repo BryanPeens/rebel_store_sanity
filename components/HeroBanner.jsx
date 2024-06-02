@@ -4,12 +4,12 @@ import { urlFor } from "../lib/client";
 
 const HeroBanner = ({ heroBanner }) => {
   return (
-    <div className="relative bg-gray-800 text-white py-16 px-4 sm:px-8 md:px-16 lg:flex lg:items-center lg:justify-between mt-10">
+    <div className="relative bg-gray-800 text-white py-16 px-4 sm:px-8 md:px-16 lg:flex lg:items-center lg:justify-between mt-10 rounded-lg">
       <div className="lg:w-1/2">
         <p className="text-sm font-light uppercase tracking-wide">
           {heroBanner.smallText}
         </p>
-        <h3 className="text-2xl md:text-4xl font-semibold my-2">
+        <h3 className="text-2xl md:text-3xl sm:text-2xl font-semibold my-2">
           {heroBanner.midText}
         </h3>
         <h1 className="text-5xl md:text-7xl font-bold leading-tight">
@@ -21,7 +21,7 @@ const HeroBanner = ({ heroBanner }) => {
         <Link href={`/product/${heroBanner.product}`}>
           <button
             type="button"
-            className="mt-8 px-8 py-3 bg-red-600 text-white text-lg font-medium rounded-md hover:bg-red-700 transition-colors"
+            className="mt-8 px-8 py-3 bg-red-600 text-white text-lg font-medium rounded-md hover:bg-red-700 transition-colors w-full lg:w-3/5"
           >
             {heroBanner.buttonText}
           </button>
